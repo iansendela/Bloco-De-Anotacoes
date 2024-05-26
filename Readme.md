@@ -1,6 +1,7 @@
 ### Projeto de bloco de anotações
     - Ele serve para anotar qualquer coisa que não queiremos esquecer ele de adicionar
-    texto você pode adicionar textos com estilos pode adicionar imagens e videos alem de facilitar na busca e muito mais.
+    texto você pode adicionar textos com estilos pode adicionar imagens e videos alem de facilitar na busca
+    e muito mais.
 
 
 
@@ -26,4 +27,4 @@
 
     - **Ler Bloco/Tema** - Visualiza o tema.
 
-
+### Projeto ainda em desevolvimento

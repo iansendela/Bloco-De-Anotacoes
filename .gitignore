@@ -1,0 +1,17 @@
+# Arquivos de byte compilados
+__pycache__/
+*.pyc
+
+# Arquivos de ambiente virtual
+venv/
+.env
+
+# Arquivos gerados pelo Django
+*.log
+db.sqlite3
+/media
+/static
+
+# Dependências instaladas
+/lib/
+/bin/

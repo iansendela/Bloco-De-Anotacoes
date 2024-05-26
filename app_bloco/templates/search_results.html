@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Estilo personalizado para centralizar o texto */
+    .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<h1 class="mb-4 display-4 text-center">Resultados da Pesquisa</h1>
+
+{% if bloco_list %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+  
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      
+  
+      {% for bloco in object_list %}
+        
+          
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">
+                    Bloco de notas
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ bloco.titulo }}</h5>
+                    <p class="card-text">{{ bloco.assunto }}</p>
+                    <a href="{% url 'detalhes' bloco_id=bloco.id %}" class="btn btn-primary">Detalhes</a>
+                  </div>
+                  <div class="card-footer text-body-secondary">
+                    {{ bloco.hours_minutes_ago }}
+                  </div>
+                </div>
+              </div>    
+      {% endfor %}
+      {% else %}
+            
+      <div class="container py-2 text-center">
+        <h2 class="fw-light center-text">Nenhum resultado encontrado.</h2>
+        </div>
+
+      {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

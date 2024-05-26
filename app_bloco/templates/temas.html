@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="bd-example-snippet bd-code-snippet"><div class="bd-example m-0 border-0">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Temas</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Delatar</th>
+              </tr>
+              </thead>
+    {% for tema in temas %}
+    
+          
+          <tbody>
+          
+          <tr class="table-primary">
+            <th scope="row">{{ tema.tema }}</th>
+            <td><a href="{% url 'update_tema' tema_id=tema.id %}" class="btn btn-success btn-bg px-4">Editar</a></td>
+            <td><a href="{% url 'deletar_tema' tema_id=tema.id %}" class="btn btn-danger btn-bg px-3">Apagar</a></td>
+          </tr>
+          
+         
+    {% endfor %}
+</tbody>
+</table>
+</div></div>
+
+    
+    
+
+
+
+{% endblock %}

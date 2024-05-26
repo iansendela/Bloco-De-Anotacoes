@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<style>
+    /* Estilo personalizado para centralizar o texto */
+    .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+
+<div class="album py-5 bg-body-tertiary">
+  <h1 class="text-center text-dark h1">Todos blocos de anotações</h1>
+      <div class="container">
+  </div>
+</div>
+
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+      <!-- ... Filtros ... -->
+      <form method="get" action="{% url 'blocos' %}" class="mt-3">
+          <div class="row g-3"> 
+          <div class="col-md-4">
+              <label for="id_tema">Todos blocos:</label>
+              <select id="id_tema" name="tema" class="form-select">
+                  <option value="" {% if not categoria_selecionada %}selected{% endif %}>Todas as categorias</option>
+                {% for opcao in bloco_list.fitro_temas %}
+
+                <option value="{{ opcao.tema }}" {% if categoria_selecionada == '{{ opcao.tema }}' %}selected{% endif %}>{{ opcao.tema }}</option>
+
+                {% endfor %}
+              </select>
+          </div>
+
+          <div><input type="submit" value="Filtrar"></div>
+      </form>
+  </div>
+</div>
+
+
+
+
+{% if bloco_list %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+  
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      
+  
+      {% for bloco in bloco_list %}
+        
+          
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">
+                    Bloco de notas
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ bloco.titulo }}</h5>
+                    <p class="card-text">{{ bloco.assunto }}</p>
+                    <a href="{% url 'detalhes' bloco_id=bloco.id %}" class="btn btn-primary">Detalhes</a>
+                  </div>
+                  <div class="card-footer text-body-secondary">
+                    {{ bloco.hours_minutes_ago }}
+                  </div>
+                </div>
+              </div>    
+      {% endfor %}
+      {% else %}
+            
+      <div class="container py-2 text-center">
+        <h2 class="fw-light center-text">Nenhum resultado encontrado.</h2>
+        </div>
+
+      {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+{% if is_paginated %}
+<nav aria-label="Page navigation conatiner"></nav>
+<ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+    {% endif %} 
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+    {% endif %}
+{% endif %}
+</ul>
+</nav>
+</div>
+{% endblock %}

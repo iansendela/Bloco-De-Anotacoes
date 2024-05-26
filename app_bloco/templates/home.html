@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<style>
+  /* Estilo personalizado para centralizar o texto */
+  .center-text {
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+</style>
+
+
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Blocos de notas</h1>
+      <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+      <p>
+        <a href="{% url 'novo_bloco' %}" class="btn btn-primary my-2">Novo Bloco de Notas</a>
+        <a href="{% url 'novo_tema' %}" class="btn btn-secondary my-2">Novo tema</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% if bloco_list %}
+
+<div class="album py-7 bg-body-tertiary">
+    <div class="container mb-5">
+  
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      
+  
+      {% for bloco in bloco_list %}
+        
+          
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">
+                    Bloco de notas
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ bloco.titulo }}</h5>
+                    <p class="card-text">{{ bloco.assunto }}</p>
+                    <a href="{% url 'detalhes' bloco_id=bloco.id %}" class="btn btn-primary">Detalhes</a>
+                  </div>
+                  <div class="card-footer text-body-secondary">
+                    {{ bloco.hours_minutes_ago }}
+                  </div>
+                </div>
+              </div>    
+      {% endfor %}
+      {% else %}
+            
+      <div class="container py-2 text-center">
+        <h2 class="fw-light center-text">Nenhum resultado encontrado.</h2>
+        </div>
+
+      {% endif %}
+      </div>
+    </div>
+  </div>  
+
+
+{% if is_paginated %}
+<nav aria-label="Page navigation conatiner">
+<ul class="pagination justify-content-center mb-5">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+    {% endif %} 
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+    {% endif %}
+{% endif %}
+</ul>
+</nav>
+</div>
+{% endblock %}
